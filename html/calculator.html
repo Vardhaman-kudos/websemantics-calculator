@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script id=declare_globals>
+        var LS = {
+            globalJS: "342-globalJS",
+            prismCSS: "155-prismCSS",
+            prismJS: "112-prismJS",
+            socialCSS: "129-socialCSS",
+            disqusCSS: "107-disqusCSS",
+            disqusJS: "118-disqusJS"
+        };
+        var device = "desktop", hasDemo = '', d = document, useJS = !1, useCSS = !1, useLocalStorage = !1, useTouch = !1, addDisqus = "1", tidyLS = false;
+        !function () { "use strict"; var e = d.documentElement, a = function () { try { return "localStorage" in window && null !== window.localStorage } catch (e) { return !1 } }(); useLocalStorage = a, e.className = e.className.replace("noJS", "hasJS"), d.addEventListener && d.documentElement.classList && d.documentElement.classList && window.File && window.FileReader && window.FileList && (useJS = !0, e.className = e.className.replace("hasJS", "useJS")), "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0 ? (useTouch = !0, e.className += " useTouch") : e.className += " noTouch", "flex" in e.style && (useCSS = !0, e.className = e.className.replace("minCSS", "useCSS")), performance && performance.mark && performance.mark("timeToTitle") }();
+        if (window.location.hash === "#noAnimations") { d.documentElement.className += " noAnimations" }
+        function removeIdNode(i) { i && (i = d.getElementById(i)) && i.parentNode.removeChild(i) }
+        function scriptWriter(i, s, c) { var a = d.createElement("script"); a.src = s; a.async = !0; a.id = i; c && (a.onload = c); d.body.appendChild(a) }
+        function debounce(n, t, u) { var e; return function () { var i = this, o = arguments, a = u && !e; clearTimeout(e), e = setTimeout(function () { e = null, u || n.apply(i, o) }, t || 200), a && n.apply(i, o) } }
+        window.getFile = k;
+        function k(l, e, a, f, g, h) { var c = d.getElementById(a); if (useJS && useCSS && c) { if (useLocalStorage) for (a = localStorage.length; a--;)if (localStorage.key(a) === e) { c.innerHTML = localStorage.getItem(e); g = !0; removeIdNode(f); break } if (!g) { var b = new XMLHttpRequest; b.version = e; b.onload = function () { var a = b.version; 200 === this.status && (c.innerHTML = this.responseText, useLocalStorage && a && "X" !== a && (localStorage[a] = this.responseText, tidyLS = !0, console.log(a + " added to local storage")), removeIdNode(f)) }; b.open("get.html", l, !0); b.send() } if (h) return h(c) } };
+    </script>
+    <style id=basic_styles>
+        .button,
+        a {
+            text-decoration: none
+        }
+
+        html {
+            font-family: sans-serif;
+            box-sizing: border-box;
+            overflow-y: scroll
+        }
+
+        *,
+        :after,
+        :before {
+            box-sizing: inherit
+        }
+
+        .mobile {
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%
+        }
+
+        body {
+            background: #fafafd;
+            color: #3a2c49
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: #4B3D5A;
+            font-weight: 400
+        }
+
+        h2,
+        h3,
+        h4,
+        code {
+            letter-spacing: -.01em
+        }
+
+        b,
+        strong {
+            font-weight: 700
+        }
+
+        a {
+            color: #236ECE;
+            border-bottom: 1px solid #236ECE
+        }
+
+        a:active,
+        a:focus,
+        a:hover {
+            color: #014cac;
+            border-color: #014cac
+        }
+
+        a:focus {
+            background-color: #fff;
+            outline: #fff solid .25rem
+        }
+
+        h1 a,
+        h1 a:active,
+        h1 a:focus,
+        h1 a:hover {
+            color: #4B3D5A;
+            cursor: text;
+            border: 0 solid
+        }
+
+        img {
+            border: 0;
+            max-width: 100%;
+            vertical-align: top
+        }
+
+        fieldset {
+            border: 0;
+            padding: 0;
+            margin: 0
+        }
+
+        input[type=checkbox],
+        input[type=radio] {
+            box-sizing: border-box;
+            padding: 0
+        }
+
+        input[type=search] {
+            -webkit-appearance: textfield;
+            box-sizing: content-box
+        }
+
+        input[type=search]::-webkit-search-decoration,
+        search-cancel-button {
+            -webkit-appearance: none
+        }
+
+        em,
+        i,
+        q {
+            font-style: italic;
+            padding-right: .1rem
+        }
+
+        code,
+        kbd,
+        pre {
+            font-family: monospace, monospace
+        }
+
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+            color: inherit;
+            font: inherit;
+            margin: 0
+        }
+
+        button,
+        select {
+            text-transform: none
+        }
+
+        button {
+            cursor: pointer;
+            overflow: visible;
+            vertical-align: bottom
+        }
+
+        button[disabled],
+        html input[disabled] {
+            cursor: default
+        }
+
+        button::-moz-focus-inner,
+        input::-moz-focus-inner {
+            border: 0;
+            padding: 0
+        }
+
+        pre {
+            overflow: hidden;
+            background-color: #FCFDFA
+        }
+
+        pre>code {
+            overflow-x: scroll;
+            display: block;
+            padding: 1rem;
+            border-width: 0 !important;
+        }
+
+        .hide {
+            position: absolute;
+            left: -200em;
+            margin: 0
+        }
+
+        .noscript {
+            font-weight: 700;
+            color: #c00
+        }
+
+        .list--unstyled {
+            list-style-type: none;
+            padding-left: 0
+        }
+
+        .button {
+            display: block;
+            color: #fff;
+            background-color: #666;
+            border: 1px solid #242424;
+            text-align: center;
+            cursor: pointer;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            padding: .618em 1.618em
+        }
+
+        .smaller {
+            font-size: smaller
+        }
+
+        small {
+            font-size: small
+        }
+
+        .skipToContent {
+            display: block;
+            position: absolute;
+            left: 0;
+            top: -4em;
+            padding: .618em 1em;
+            transition: all .4s
+        }
+
+        .skipToContent:focus {
+            top: .384em;
+            color: #fff;
+            background: #3B2D4A;
+            z-index: 10;
+            left: .384em;
+            outline: .125rem solid #b3d4ff
+        }
+    </style>
+    <style id=minimum_styles>
+        h1 {
+            font-size: 26px
+        }
+
+        h2 {
+            font-size: 22px
+        }
+
+        h3 {
+            font-size: 20px
+        }
+
+        small {
+            font-size: small
+        }
+
+        hr {
+            box-sizing: content-box;
+            height: 0;
+            color: #fff
+        }
+
+        input {
+            line-height: normal;
+            padding: .156em;
+            width: 195px
+        }
+
+        body {
+            line-height: 24px;
+            margin: 16px;
+            max-width: 34em;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAACIAQMAAADgcTgQAAAAA1BMVEXu7u6DSdFtAAAADElEQVR4XmNAAaMAAAEQAAHPBGa9AAAAAElFTkSuQmCC) 0 -32px repeat-x
+        }
+
+        article,
+        aside,
+        footer,
+        header,
+        main,
+        nav,
+        section {
+            display: block
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 42px 0 24px;
+            line-height: 1.2em
+        }
+
+        li {
+            margin: 0 0 16px
+        }
+
+        p {
+            margin: 0 0 24px
+        }
+
+        .content .r {
+            margin: 42px 0
+        }
+
+        .c,
+        .list-nav .logo-li,
+        .logo-svg,
+        .main-header .r,
+        .noJS .js-required,
+        .search-input+button>svg {
+            display: none
+        }
+
+        ul {
+            margin: 0
+        }
+
+        .list-nav li {
+            display: inline-block;
+            padding-right: 1em
+        }
+
+        article .smaller {
+            margin-bottom: 10px
+        }
+
+        article h2 {
+            margin-bottom: 6px
+        }
+
+        .content ul,
+        pre {
+            margin: 24px 0
+        }
+
+        pre>code {
+            padding: 12px
+        }
+    </style>
+    <script id=above_the_fold type=text/css>
+html{
+  --focusOutlineDarkBg:hsla(214,100%,85%,.25);
+  --focusOutlineLightBg:hsl(214,100%,85%);
+}
+@media (min-width:48em){:root{min-height:0vw;font-size:calc(1rem + ((1vw - 0.48rem) * 0.6944))}}
+.hidden,.main-nav,.spot,.svg-menu path,main{backface-visibility:hidden}.search-fieldset,.smaller i,header i span{white-space:nowrap}
+@media (min-width:48em){.useJS .main-nav a::before{content:""}}
+.button,.clickable,.pab-btn{cursor:pointer}.clickable,.pab-btn{touch-action:manipulation}body{scroll-behavior:smooth;line-height:1.435;margin:0}a{border-color:rgba(35,110,206,.25)}h1{font-size:1.618rem;margin:0 0 1.618rem}h2{font-size:1.382rem}h3{font-size:1.236rem;line-height:1.382}blockquote,header p,kbd,legend,th{font-size:1.115rem;font-weight:100}.mobile .italics,.mobile blockquote,.mobile header p,.mobile legend,.mobile th{font-size:1rem;font-style:italic;font-weight:100}h2>code{font-size:smaller}.small{font-size:.854rem;letter-spacing:.02rem}
+@media (min-width:48em){
+main .r{font-size:.854rem}.minCSS main .r{font-size:1rem}
+.r h2{font-size:1.115rem;margin-bottom:.618rem}.r h3{font-size:1rem}
+}
+h1,h2{line-height:1.236}
+@media (min-width:24.875em){body{line-height:1.5}}
+@media (min-width:30em){h2,h3{line-height:1.3}}
+h2,h3{margin:2.618rem 0 1rem}
+blockquote,p{margin:0 0 1.618rem}
+@media (min-width:48em){.r p{margin-bottom:1rem}}
+article p{margin-bottom:.382rem}dl,ol,ul{margin-top:0;margin-bottom:1.618rem}li{margin:.618rem 0}dt{margin:1rem 0 .618rem}dd{margin:.618rem 0 .618rem 1.618rem}hr{margin:1.618rem 0 0;border-color:#E9DEF5 #fff #fff;border-width:0}header p:last-child{margin-bottom:0}.content .r>:first-child,.content-h2-first,.mt0{margin-top:0}.content .r{margin-top:1.618rem}
+.r .h2-barebones{margin:0 0 2.618rem;-moz-osx-font-smoothing:auto;-webkit-font-smoothing:subpixel-antialiased}
+.flex{display:block;clear:both;flex-wrap:wrap;justify-content:center}
+.flex.fp{padding:1.618rem .618rem}
+@media (min-width:48em){.flex.fp{padding:1.618rem}}
+.l,.r{position:relative;width:100%;max-width:34rem;min-width:0;margin:0 auto}.c,header .r{display:none}
+@media (min-width:48em){
+.content .r,h1{margin-top:0}.aside-h2{margin:2.618rem 0 .618rem}.c,header .r{display:block}
+.l{flex-grow:1.618;flex-shrink:1.618;flex-basis:0}
+.l{flex:1.618 1.618 0px}
+h1{white-space:nowrap}
+.r{flex-grow:1;flex-shrink:1;flex-basis:0;max-width:21rem}
+.r{flex:1 1 0px;max-width:21rem}
+.c{width:1.618rem}
+}
+
+@supports (display:flex){.flex{display:flex;clear:none}}
+
+@media (-ms-high-contrast:active),(-ms-high-contrast:none){
+.flex{display:flex;justify-content:space-between;clear:none}
+}
+
+.content>:last-child{margin-bottom:0}
+.main-header.flex{display:block}
+@media (min-width:48em){.main-header.flex{display:flex}}
+.main-header .r img{display:block;margin:0 auto}
+.main-nav>.l{overflow:visible}
+.main-nav ul{overflow:hidden}
+
+@media (min-width:48em){
+.main-nav .logo-li{margin:0 1rem 0 .25rem}
+.logo-li{position:relative;height:1.5rem;border:none;width:auto;margin:1rem 1.618rem}
+.logo-container{position:relative;width:1.5em;height:1.5em}
+.logo,.logo>b{width:100%;height:100%;position:absolute}
+.logo-container.small{font-size:1rem}
+.logo-container.large{font-size:6rem;margin:3rem auto 0}
+.logo{transform-style:preserve-3d;transition:transform 3s ease-in-out}
+.hovered0 .logo,.hovered1 .logo,.hovered2 .logo,.hovered3 .logo{will-change:transform;transition:transform 1.5s ease-in-out}
+.large .logo>b{border:1px solid #FAFAFA}
+.logo>:nth-child(6n+1){transform:translateZ(.75em)}
+.logo>:nth-child(6n+2){transform:rotateX(-180deg) translateZ(.75em)}
+.logo>:nth-child(6n+3){transform:rotateY(90deg) translateZ(.75em)}
+.logo>:nth-child(6n+4){transform:rotateY(-90deg) translateZ(.75em)}
+.logo>:nth-child(6n+5){transform:rotateX(90deg) translateZ(.75em)}
+.logo>:nth-child(6n+6){transform:rotateX(-90deg) translateZ(.75em)}
+.logo i{display:none;position:absolute;width:50%;height:50%}
+.small .logo i{border:1px solid #4B3D5A}
+.large .logo i{opacity:.6;border:1px solid #FAFAFA}
+.logo>:nth-child(6n+1)>:nth-child(4n+1),.logo>:nth-child(6n+1)>:nth-child(4n+3),.logo>b>:nth-child(4n+1){border-width:1px 2px 1px 1px}
+.logo>b>:nth-child(4n+1){top:0;right:auto;bottom:auto;left:0}
+.logo>b>:nth-child(4n+2){top:0;right:0;bottom:auto;left:auto}
+.logo>b>:nth-child(4n+3){top:auto;right:auto;bottom:0;left:0}
+.logo>b>:nth-child(4n+4){top:auto;right:0;bottom:0;left:auto}
+.logo>:nth-child(6n+4)>:nth-child(4n+1),.logo>:nth-child(6n+4)>:nth-child(4n+2){border-width:1px 1px 2px}
+.logo>:nth-child(6n+5)>:nth-child(4n+4){border-width:2px 1px 1px 2px}
+.logo>:nth-child(6n+1)>:nth-child(4n+1),.logo>:nth-child(6n+1)>:nth-child(4n+3),.logo>:nth-child(6n+2)>:nth-child(4n+4),.logo>:nth-child(6n+3)>:nth-child(4n+3),.logo>:nth-child(6n+4)>:nth-child(4n+1),.logo>:nth-child(6n+4)>:nth-child(4n+2){display:block;background-color:#796e85}
+.logo>:nth-child(6n+2)>:nth-child(4n+1),.logo>:nth-child(6n+2)>:nth-child(4n+2),.logo>:nth-child(6n+3)>:nth-child(4n+4),.logo>:nth-child(6n+5)>:nth-child(4n+4),.logo>:nth-child(6n+6)>:nth-child(4n+3),.logo>:nth-child(6n+6)>:nth-child(4n+4){display:block;background-color:#eee}
+.logo>:nth-child(6n+2)>:nth-child(4n+3),.logo>:nth-child(6n+3)>:nth-child(4n+1),.logo>:nth-child(6n+3)>:nth-child(4n+2),.logo>:nth-child(6n+6)>:nth-child(4n+1),.logo>:nth-child(6n+6)>:nth-child(4n+2){display:block;background-color:#B9C5D2}
+.logo{transform:rotateX(-35deg) rotateY(45deg)}
+.hovered0 .logo,.logo-container:hover>.logo{transform:rotateX(-144deg) rotateY(-45deg)}
+.hovered1 .logo{transform:rotateX(126deg) rotateY(45deg)}
+.hovered2 .logo{transform:rotateX(-160deg) rotateY(45deg)}
+.hovered3 .logo{transform:rotateX(-126deg) rotateY(-135deg)}
+.hovered4 .logo{transform:rotateX(-160deg) rotateY(-45deg)}
+.hovered5 .logo{transform:rotateX(-144deg) rotateY(-135deg)}
+}
+
+.main-nav,.main-nav>h2{background-color:#4B3D5A;color:#fff}.main-nav,main{transition:transform .8s ease,visibility .8s}.main-nav{overflow-y:auto}.useJS .main-nav{padding:0;position:fixed;left:0;right:0;top:0;bottom:0;z-index:2;transform:translateX(100%) translateZ(0)}.main-nav.ON{transform:translateX(0)}main{transform:translateX(0) translateZ(0)}main.ON{transform:translateX(-100%);overflow:hidden}.main-nav a::before,.noJS .main-nav a:active,.noJS .main-nav a:focus,.noJS .main-nav a:hover{background-color:#3B2D4A}.navigation-content-display{display:none}.main-nav a,.useJS .main-nav.flex{display:block}.main-nav.flex{justify-content:flex-start}.main-nav>.l{max-width:none;width:100%;margin-top:2.618rem}.main-nav li{margin:0;padding:0;border-bottom:1px solid #2B3145}
+.main-nav a{border:0;position:relative;width:100%;padding:.382rem .618rem;color:#fff}
+.main-nav a:focus{outline:solid 0}
+.main-nav a:active,.main-nav a:focus,.main-nav a:hover{text-shadow:1px 1px 1px #000;text-decoration:none;background-color:#3B2D4A}
+.main-nav a::before{position:absolute;left:0;top:0;width:100%;height:100%;z-index:-1;transition:opacity .5s;opacity:0}
+.main-nav a:focus::before,
+.main-nav a:hover::before{opacity:1}
+.main-nav a:focus::before,.main-nav a:hover::before{outline:.125rem solid var(--focusOutlineDarkBg)}
+
+.search-form{margin:0;padding:1rem 1.618rem}
+.search-input{flex:1;padding:.4rem .618rem;margin:0;color:#fff;border-color:rgba(0,0,0,.05);font-size:.854rem;outline:0 solid var(--focusOutlineDarkBg);transition:all .4s}
+.search_btn:focus,
+.search-input:focus{background-color:#2B1D3A;outline:.125rem solid var(--focusOutlineDarkBg);font-size:1rem;padding-top:0;padding-bottom:0;z-index:1}
+.main-nav .logo-li{display:none}.LI{padding-left:.15rem}
+.search-input{background-color:#3B2D4A}
+.search-input::-webkit-input-placeholder{color:#a89791}
+.search-input::placeholder{color:#a89791;opacity:1}
+
+.search_btn{width:2.25rem;height:2.25rem;border:0;margin:0;padding:0;color:#b7b7b7;background-color:#3B2D4A}
+.search_btn:hover,.search_btn:focus{color:#fff}
+.search_svg{display:block;width:100%;height:100%}
+
+[aria-pressed="false"]+[aria-expanded="false"]>div {visibility:hidden}
+.pab-btn:focus,footer a:focus{outline:none}
+
+@media (min-width:48em){
+.useJS .main-nav,main,main.ON{transform:translateX(0)}.main-nav{overflow:visible}.navigation-content-display{display:block}
+.main-nav ul,.useJS .main-nav.flex{display:flex}.useJS .main-nav{transition:none;opacity:1;position:static;right:auto;bottom:auto}.main-nav.flex{padding:0 1.618rem;display:flex;justify-content:center;align-content:center}.main-nav>.l{max-width:34rem;width:auto;margin-top:0}
+.main-nav ul{align-items:center;justify-content:space-around;margin:0;padding:0;font-weight:lighter;letter-spacing:.02rem}
+/* Safari 7.1+ only */
+_::-webkit-full-page-media, _:future, :root .main-nav ul{font-weight:400}
+.main-nav .logo-li,.main-nav a,.main-nav li{display:inline-block}
+.main-nav li{margin:.618rem 0;border:none}
+.main-nav a{padding:.382rem;color:#fff}
+.main-nav .current,.main-nav .current:focus,.main-nav .current:hover,.main-nav a:focus,.main-nav a:hover{background-color:transparent}
+.main-nav a::before{transition:all .4s ease-out;transform:scale(0)}
+.main-nav a:focus::before,.main-nav a:hover::before{transform:scale(1)}
+.search-form{padding:.618rem 0}
+}
+@media (min-width:52em){.main-nav a{padding:.382rem .618rem}}
+
+[class^="btn-menu"] {box-sizing:content-box;color:#503660;background-color:#fafafd;border:.125em solid transparent;border-radius:50%;padding:.25em;display:block;width:2.25em;height:2.25em;outline:0 solid;transition:all .3s ease-out;box-shadow:0 .25em .25em rgba(0,0,0,.3);position:fixed;top:.25rem;right:.25rem;z-index:5;overflow:hidden}
+[class^="btn-menu"]:hover,[class^="btn-menu"]:focus {background-color:#fff;color:#418cec;transform:scale(1.15);box-shadow:0 .5em .5em rgba(0,0,0,.4);border-color:hsl(214,100%,70%)}
+.svg-menu {width:2.25em;height:2.25em;border-radius:100%;overflow:hidden;pointer-events:none;transition:transform .8s ease-out;stroke-width:5;stroke-linecap:square;stroke:currentColor}
+.btn-menu[aria-pressed=true] .svg-menu{transform:rotate(225deg)}
+.svg-menu path{transition:opacity .8s ease-in-out,transform .8s ease-in-out}
+.btn-menu[aria-pressed=true] .h,.svg-menu .x{opacity:0}
+.btn-menu[aria-pressed=true] .x{opacity:1}
+.btn-menu[aria-pressed=true] .t{transform:translate(0,8px);transform:translateY(8px)}
+.btn-menu[aria-pressed=true] .b{transform:translate(0,-8px);transform:translateY(-8px)}
+.btn-menu.-js-clicked {animation:menuButton-pressed .4s ease-out forwards}
+@keyframes menuButton-pressed {
+0% {transform:scale(1.15)}
+50% {transform:scale(.85)}
+100% {transform:scale(1.15)}
+}
+@media (min-width:48em){.useJS .btn-menu{display:none}}
+
+.content{background:#fffffa url("data:image/svg+xml;charset=utf8,%3Csvg width='1200' height='256' viewBox='0 0 1200 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.4'%3E%3C/feTurbulence%3E%3C/filter%3E%3C/defs%3E%3Crect height='256' width='1200' filter='url(%23noise)' opacity='.3'/%3E%3C/svg%3E");min-height:62vh}header{background-color:rgba(35,110,206,.15)}.button{position:relative;display:inline-block;padding:.618rem 1.618rem;color:#FFF;letter-spacing:1px;text-shadow:rgba(0,0,0,.9) 0 1px 2px;background-color:#434343;border:1px solid #242424;border-radius:4px;box-shadow:rgba(255,255,255,.25) 0 1px 0,inset rgba(255,255,255,.25) 0 1px 0,inset rgba(0,0,0,.5) 0 0 0,inset rgba(255,255,255,.08) 0 1.25rem 0,inset rgba(0,0,0,.3) 0 -1.25rem 1.25rem,inset rgba(255,255,255,.1) 0 1.25rem 1.25rem;transition:all .2s linear}.button::before,footer a::before{position:absolute;top:0;content:""}.button:focus,.button:hover{color:#fff;text-decoration:none;box-shadow:rgba(0,0,0,.5) 0 2px 5px,inset rgba(255,255,255,.25) 0 1px 0,inset rgba(0,0,0,.25) 0 0 0,inset rgba(255,255,255,.03) 0 20px 0,inset rgba(0,0,0,.15) 0 -20px 20px,inset rgba(255,255,255,.05) 0 20px 20px}.button:active{color:#fff;box-shadow:rgba(255,255,255,.25) 0 1px 0,inset rgba(255,255,255,0) 0 1px 0,inset rgba(0,0,0,.5) 0 0 5px,inset rgba(255,255,255,.03) 0 20px 0,inset rgba(0,0,0,.15) 0 -20px 20px,inset rgba(255,255,255,.05) 0 20px 20px}.button::before{display:block;background:linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,0) 100%);padding:0 12px;left:15%;height:1px;width:40%;box-shadow:rgba(255,255,255,.2) 0 1px 5px;transition:all .3s ease-in-out}footer a,pre{position:relative}.btn-goto,footer .l,footer .r{width:100%}.button:hover::before{left:45%}.button:active::before{opacity:0}.button.orange{background-color:#c75000}.button.green{background-color:#477343}.btn-barebones,.btn-goto,.btn-goto:focus{background-color:#236ECE}.btn-barebones{font-weight:300}.btn-barebones i{color:inherit}.btn-goto{font-weight:300;padding:1rem}pre{white-space:pre;hyphens:none;background-color:#FCFDFA;box-shadow:0 2px 2px rgba(0,0,0,.2);line-height:2;padding:0}pre>code{display:block;padding:1rem;border:0 solid #FCFDFA;border-width:0 0 0 1.5rem}:not(pre)>code,kbd{padding:0 .2rem;color:#7A56A5}
+@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}
+
+footer,footer a,footer h2{color:#fff}
+footer{background-color:#3B2D4A;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-smoothing:antialiased}
+footer .flex{padding:1rem}
+footer ul{margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center}
+footer li{margin:0}footer li:first-of-type{margin-top:0}
+footer a{border:0;z-index:0;display:block;padding:.618rem 1rem}
+footer a:active,footer a:focus,footer a:hover{color:#fff;background-color:inherit;text-decoration:none;z-index:1}
+.clickable.lift a,.pab-btn:focus,.pab-btn:hover{color:#236ECE}
+footer .r a{text-align:center}
+footer a::before{left:0;width:100%;height:100%;background-color:#2B1D3A;z-index:-1;transition:opacity .5s;opacity:0}
+footer a:focus::before,footer a:hover::before{opacity:1;outline:.125rem solid var(--focusOutlineDarkBg)}
+footer .r{align-self:flex-end}
+@media (min-width:48em){
+footer a,footer li{display:inline-block}
+footer ul{justify-content:flex-start}
+footer .r{text-align:right;width:auto}
+footer a{padding:.618rem}
+footer a::before{transition:all .4s ease-out;transform:scale(0)}
+footer a:focus::before,footer a:hover::before{transform:scale(1)}
+}
+article{border:1px solid transparent;padding:1rem 1rem .25rem}article h2{margin:0 0 .618rem}.clickable{border:1px solid rgba(96,96,128,.1);position:relative;background-color:rgba(255,255,255,.3)}.logo-container *,.clickable *,.pab-btn *{pointer-events:none}.clickable,.clickable>.no-overflow{padding:1rem}.no-overflow{border:1px solid rgba(255,255,255,.7)}.clickable .no-overflow :last-child,.clickable :last-child{margin-bottom:0}.clickable{transition:box-shadow .3s ease,background-color .3s ease,transform .7s ease-in;padding:0}.clickable p{font-weight:100;margin-bottom:.382rem}
+@media (min-width:48em){.useJS.useCSS .main-nav{transition:transform .4s ease-out}.useJS.useCSS .main-nav.nav-up{transform:translate(0,-3.5rem)}}
+.shadowlift{position:relative;margin:1.618rem 0 2.618rem}.shadowlift::after,.shadowlift::before{content:"";z-index:-1;position:absolute;width:48%;top:80%;bottom:.618rem;box-shadow:0 .618rem .618rem rgba(119,119,119,.6)}.pab,.pab-btn{position:relative;overflow:hidden}.shadowlift::before{left:.618rem;transform:rotate(-2deg)}.shadowlift::after{right:.618rem;transform:rotate(2deg)}.shadowlift.last{margin-bottom:.618rem}.twist1{transform:rotate(-.3deg)}.twist2{transform:rotate(.2deg)}.twist3{transform:rotate(-.4deg)}.twist4{transform:rotate(.3deg)}.hidden,.spot{transform:translate3d(0,0,0);perspective:1000}.pab{margin:1.618rem 0;border:1px solid rgba(96,96,128,.1);background-color:#fafafa;background-color:rgba(255,255,255,.3);transition:box-shadow .3s ease-out,background-color .3s ease-out}.l .pab{margin:2.618rem 0;border:1px solid rgba(96,96,128,.3)}.lift{background-color:#fefefe;box-shadow:0 4px 4px rgba(0,0,0,.3)}
+.pab h2{padding:calc(.618rem + 4px) .236rem calc(.618rem - 1px) calc(2.618rem + 1px);font-size:1.115rem;margin:0}.pab .btn-added{padding:0}.l .pab h2{font-size:1.236rem}.noJS .pab h2{padding:.618rem 1rem}.performance>.pab:last-child{margin-bottom:0}.pab-btn{display:block;width:100%;text-align:left;border:1px solid rgba(255,255,255,.7);padding:calc(.618rem + 2px) .236rem calc(.618rem - 2px) .618rem;background-color:transparent;font-size:inherit;transition:color .3s ease-out}.svg-plus{width:1.8rem;height:1.8rem;vertical-align:middle;display:inline-block;margin:-.236rem .236rem 0 0;transition:transform .7s ease-out}.hidden,.hidden ul{margin:0}.svg-plus path{stroke-width:3;stroke-linecap:square;stroke:#9F9DB2;transition:stroke .5s ease-out,opacity .7s ease-out}[aria-pressed="true"] .svg-plus{transform:rotateZ(360deg)}[aria-pressed="true"] .h{opacity:0}.pab-btn:focus .svg-plus path,.pab-btn:hover .svg-plus path{stroke:#418cec}.spot{display:block;position:absolute;background:rgba(35,110,206,.35);border-radius:50%;transform:scale(0);opacity:1;-webkit-filter:blur(1rem);filter:blur(1rem)}.spot.spotOn{animation:spot-open .6s ease-in}
+@keyframes spot-open{100%{opacity:0;transform:scale(2.4)}}.spot.spotOff{animation:spot-close .6s ease-out}
+@keyframes spot-close{0%{opacity:0;transform:scale(2.4)}100%{opacity:1;transform:scale(0)}}.hidden{border-top:1px solid rgba(0,0,0,.1);padding:0 1rem;max-height:0;transition:max-height .65s ease-in-out;overflow:hidden;list-style:none}.hidden li{margin:1rem 0}.hidden>:first-child{margin-top:1rem}.hidden>:last-child{margin-bottom:1rem}.hidden:focus{outline:#fff solid .25rem}.content-display,.useJS footer .content-display{display:none}
+.idle3-ON img{opacity:0;filter:drop-shadow(0 .25rem .25rem rgba(0, 0, 0, .2));transition:opacity .7s ease-out .2s}.idle3-ON img.ON{opacity:1}
+@media (max-width:27.8rem){[class^=idle3-]{display:none}}
+
+.uppercase{text-transform:uppercase}.no-wrap{white-space:nowrap}.mb-large{margin-bottom:2.168rem}.no-overflow{overflow:hidden;position:relative}
+@media (min-width:48em){.navigation_clone{display:none;visibility:hidden}.navigation_clone.ON{display:block}.navigation_fixed{position:fixed;box-shadow:0 0 4px 0 rgba(0,0,0,.5);top:0;left:0;z-index:1;transform:translate3d(0,-5rem,0)}.navigation_animate{transition:transform .4s ease-out}.navigation_show{transform:translate3d(0,0,0)}}
+@media (min-width:48em) {
+.useJS body{border-top:3.5rem solid #D9E4F6}
+.useJS .main-nav{position:fixed;width:100%;box-shadow:0 0 4px rgba(75,61,90,.7)}
+.main-nav [aria-current="page"]{border-bottom:1px solid rgba(207,227,247,0);padding-bottom:calc(.382rem - 1px);animation:brdr .5s ease-out .5s forwards}
+@keyframes brdr{to{color:hsl(214,100%,85%);border-bottom-color:hsl(214,100%,85%)}}
+}
+.metrics>:first-child{margin-top:1rem}
+.list-links .mb-small{margin-bottom:.618rem}
+
+/* New sticky article used in aside */
+.sticky{background-color:rgba(255,255,255,.3);position:-webkit-sticky;position:sticky;top:4.236rem}
+.sticky.lift{background-color:#fefefe}
+.sticky span{display:block;margin-bottom:.618rem;color:#C03F59}
+.sticky a{line-height:1.216}
+
+/* Lighthouse error */
+#footer_content>.flex>.l>.list-nav
+#footer_content>.flex>.l>.list-nav.list--unstyled>li>a{background-color:#3B2D4A;color:#fff}
+
+/* Page header images */
+.header_svg{opacity:0;transition:opacity 1s ease-out;max-height:9.5rem;width:100%;display:block;position:absolute;top:50%;left:50%;transform:translate3d(-50%,-50%,0);filter:drop-shadow(0 .3rem .2rem rgba(0,0,0,.5))}
+.header_svg-on{opacity:1}
+
+/* Sharing */
+.share{margin:1.618rem 0;border:1px solid rgba(96,96,128,.1);background-color:rgba(255,255,255,.3);position:sticky;top:4.618rem}
+.share-in{border:1px solid rgba(255,255,255,.7);padding:.618rem 1rem 1rem;font-style:italic}
+.share_ttl,.share_strp{margin:0 0 .618rem}
+.btn-twitter{background-color:hsl(200, 72%, 40%);padding:calc(.618rem + 2px) .236rem calc(.618rem - 2px) .618rem;width:100%}
+.btn-twitter:focus{background-color:#37A7DF}
+.svg-twitter{width:1.8rem;height:1.8rem;fill:currentColor;vertical-align:middle;display:inline-block;margin:-.236rem .236rem 0 0}
+
+h2+h3{margin-top:1.618rem}
+    </script>
+    <script id=insert_above_the_fold_styles>
+        (function () { "use strict"; var a = d.getElementById("above_the_fold"), b = d.createElement("style"); useCSS && a && (b.id = a.id + "_styles", b.innerHTML = a.innerHTML, a.parentNode.replaceChild(b, a), removeIdNode("insert_above_the_fold_styles"), removeIdNode("minimum_styles")); }());
+    </script>
+    <meta itemprop=image content="/apple-touch-icon-152x152.png">
+    <meta name=verify-v1 content="OVpLUD33RlsnOrIHLr66r4GSx2kupkk0AUO4ycQRo9k=">
+    <meta name=apple-mobile-web-app-capable content=yes>
+    <link rel="apple-touch-icon" href="../../apple-touch-icon-180x180.png">
+    <link rel="shortcut icon" href=https://websemantics.uk/favicon.ico type=image/x-icon>
+    <link rel=canonical href="index.html" />
+    <meta name=theme-color content=#4B3D5A>
+    <style id=local_styles>
+        input[type=radio],
+        input[type=checkbox] {
+            width: 0;
+            position: absolute;
+            left: -.618rem;
+            left: -200rem;
+            z-index: -1
+        }
+
+        input[type=radio]+span,
+        input[type=checkbox]+span {
+            position: relative;
+            display: inline-block;
+            height: 1rem;
+            padding-right: 1.25rem;
+            margin-left: .382rem
+        }
+
+        input[type=radio]+span:after,
+        input[type=radio]+span:before,
+        input[type=checkbox]+span:after,
+        input[type=checkbox]+span:before {
+            content: "";
+            position: absolute;
+            transition: transform .35s
+        }
+
+        input[type=radio]+span:after,
+        input[type=radio]+span:before {
+            top: .1rem;
+            left: 0;
+            width: 1.1rem;
+            height: 1.1rem
+        }
+
+        input[type=checkbox]+span:after,
+        input[type=checkbox]+span:before {
+            top: .2rem;
+            left: 0;
+            width: .9rem;
+            height: .9rem
+        }
+
+        input[type=radio]+span:before,
+        input[type=checkbox]+span:before {
+            border: .125rem solid #9A9A9A;
+            background-color: var(--inpBg)
+        }
+
+        input[type=radio]+span:before {
+            border-radius: 3rem
+        }
+
+        input[type=radio]:checked+span:before,
+        input[type=checkbox]:checked+span:before {
+            background-color: var(--inpBg);
+            border-color: #9c9;
+            transform: scale(.8)
+        }
+
+        input[type=radio]+span::after,
+        input[type=checkbox]+span::after {
+            width: 3rem;
+            height: 3rem;
+            top: -.875rem;
+            left: -1rem;
+            background-position: center;
+            background-size: cover;
+            transform: scale(0);
+            background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+Cjxzdmcgd2lkdGg9IjM2IiBoZWlnaHQ9IjM2IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogPHRpdGxlPnZhbGlkPC90aXRsZT4KCiA8bWV0YWRhdGEgaWQ9Im1ldGFkYXRhOCI+aW1hZ2Uvc3ZnK3htbDwvbWV0YWRhdGE+CiA8Zz4KICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+CiAgPGcgdHJhbnNmb3JtPSJtYXRyaXgoMC4wNzE5NDM0LCAwLCAwLCAtMC4wNzE5NDM0LCAzLjExNDMzLCAxOC45MTcxKSIgaWQ9ImcxMCI+CiAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDkuNDQ1NDQsIC04LjM5NTk1KSBzY2FsZSgwLjEpIiBpZD0iZzEyIj4KICAgIDxwYXRoIGQ9Im0xMDIzLjY0MzAwNSwzMC40MTM5MjljMjE1Ljk5NTkxMSwtMTM4LjAwMDAwNCAzNzEuOTk1OTExLC00NDkuOTk5OTg5IDM3MS45OTU5MTEsLTQ0OS45OTk5ODljNjcyLjAwNDE1LDEzOTIuMDAwMzA1IDE5MzIuMDA0MTUsMjE2MC4wMDA0ODggMTkzMi4wMDQxNSwyMTYwLjAwMDQ4OGMtMTM0NC4wMDAyNDQsLTEyNDIuMDAwNDg4IC0xOTUwLjAwMDM2NiwtMzAwMCAtMTk1MC4wMDAzNjYsLTMwMDBjLTQ0OS45OTk4NzgsOTA1Ljk5OTUxMiAtNjUzLjk5OTg3OCw4MzkuOTk5NTEyIC02NTMuOTk5ODc4LDgzOS45OTk1MTJsMjk5Ljk5OTkzOSw0NDkuOTk5OTg5IiBpZD0icGF0aDE0IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiMwMzk4NjIiLz4KICAgPC9nPgogIDwvZz4KIDwvZz4KPC9zdmc+)
+        }
+
+        input[type=radio]:checked+span::after,
+        input[type=checkbox]:checked+span::after {
+            transform: scale(1)
+        }
+
+        input[type=radio]:focus+span::before {
+            transform: scale(1.25);
+            border-color: #83B2E3;
+            background-color: var(--inpBgFocus)
+        }
+
+        input[type=checkbox]:focus+span::before {
+            transform: scale(1.5);
+            border-color: #83B2E3;
+            background-color: var(--inpBgFocus)
+        }
+
+        .lift pre>code,
+        pre>code:focus,
+        pre>code:hover {
+            text-overflow: inherit
+        }
+
+        body {
+            --space: 1rem;
+            --spaceAndHalf: calc(var(--space) * 1.5);
+            --spaceDouble: calc(var(--space) * 2);
+            --spaceThreeQuarter: calc(var(--space) * .75);
+            --spaceHalf: calc(var(--space) / 2);
+            --spaceQuarter: calc(var(--space) / 4);
+            --spaceEighth: calc(var(--space) / 8)
+        }
+
+        .-visuallyHidden {
+            position: absolute !important;
+            clip: rect(1px, 1px, 1px, 1px);
+            padding: 0 !important;
+            border: 0 !important;
+            height: 1px !important;
+            width: 1px !important;
+            overflow: hidden
+        }
+
+        .frm {
+            --inpBg: hsl(120, 50%, 97%);
+            --inpBgFocus: #fff;
+            --inpFocusOut: #9CC9F9;
+            background-color: hsla(120, 50%, 50%, .075);
+            border: 2px dashed #f90;
+            padding: var(--space);
+            max-width: 34rem;
+            --blockMarginBottom: var(--spaceAndHalf)
+        }
+
+        [class^=frm_fld] {
+            border: 0;
+            padding: 0;
+            margin: 0 auto
+        }
+
+        @media (min-width:30em) {
+            .frm_fld:first-child {
+                max-width: 28.7rem
+            }
+
+            .frm_lbl-property,
+            .frm_lbl-selector,
+            .frm_lgnd-options,
+            .frm_lgnd-propertyRange,
+            .frm_lgnd-viewport {
+                line-height: 1.2
+            }
+
+            .lbl_smll {
+                display: block
+            }
+        }
+
+        .frm_lbl-property,
+        .frm_lbl-selector,
+        [class^=frm_lgnd] {
+            font-size: 1rem;
+            font-weight: 400;
+            padding: 0
+        }
+
+        .lbl_smll {
+            font-weight: 300
+        }
+
+        .frm_fld-propertyRange,
+        .frm_fld-ranges,
+        .frm_fld-units,
+        .grid-property,
+        .grid-selector {
+            margin-bottom: var(--blockMarginBottom)
+        }
+
+        .frm_fld-options {
+            margin-top: var(--spaceThreeQuarter)
+        }
+
+        [class^=grid-] {
+            --columns: auto 1fr;
+            --gridGap: var(--space);
+            grid-gap: var(--gridGap);
+            grid-template-columns: var(--columns);
+            align-items: center
+        }
+
+        .grid-at {
+            display: none
+        }
+
+        @media (min-width:30em) {
+            .frm {
+                --blockMarginBottom: var(--space)
+            }
+
+            .frm_fld-propertyRange {
+                margin-bottom: 0
+            }
+
+            [class^=grid-] {
+                --columns: 7rem 1fr;
+                --gridGap: var(--spaceHalf);
+                display: grid
+            }
+        }
+
+        @media (min-width:48em) {
+            .frm_fld:first-child {
+                max-width: calc(28.7rem + ((1vw - .48rem) * .4167))
+            }
+
+            [class^=grid-] {
+                --columns: calc(7rem + ((1vw - 0.48rem) * -2.7778)) 1fr
+            }
+        }
+
+        @media (min-width:20em) {
+            .grid-units {
+                display: grid
+            }
+
+            [class*=flexed] {
+                display: flex;
+                align-content: center;
+                align-items: center;
+                flex-wrap: wrap
+            }
+
+            .flexed-units {
+                width: auto;
+                justify-content: space-between
+            }
+
+            .flexed-fromto {
+                max-width: 17rem;
+                margin: 0 auto;
+                justify-content: space-around
+            }
+
+            .flexed-methods,
+            .flexed-options {
+                text-align: center;
+                justify-content: space-around
+            }
+        }
+
+        @media (min-width:30em) {
+
+            .flexed-fromto,
+            .flexed-units {
+                min-width: 17rem;
+                margin: 0 auto
+            }
+
+            .flexed-fromto {
+                width: auto;
+                flex: auto 1 0;
+                justify-content: space-between
+            }
+
+            .flexed-methods {
+                justify-content: space-between;
+                max-width: 17rem;
+                margin: 0 auto
+            }
+
+            .flexed-options {
+                max-width: 17rem;
+                margin: 0 auto;
+                width: 100%
+            }
+        }
+
+        @media (min-width:32em) {
+            .flexed-options {
+                justify-content: space-between;
+                max-width: none
+            }
+        }
+
+        @media (min-width:48em) {
+            .flexed-options {
+                justify-content: space-around;
+                max-width: 18rem
+            }
+        }
+
+        @media (min-width:56em) {
+            .flexed-options {
+                justify-content: space-between;
+                max-width: none
+            }
+        }
+
+        [class^=IN-] {
+            line-height: inherit;
+            font-size: inherit;
+            font-weight: inherit;
+            padding: .312rem .618rem;
+            max-width: 100%;
+            display: block;
+            outline: var(--inpFocusOut)solid 0;
+            border: 1px solid #ccc;
+            background-color: var(--inpBg);
+            transition: box-shadow .3s ease-out, border-color .3s ease-out
+        }
+
+        [class^=IN-]:focus {
+            outline: var(--inpFocusOut)solid 0;
+            border-color: var(--inpFocusOut);
+            box-shadow: 0 0 .0625rem .0625rem var(--inpFocusOut);
+            background-color: var(--inpBgFocus)
+        }
+
+        [class^=IN-m] {
+            width: 4.5rem
+        }
+
+        .IN-property,
+        .IN-selector {
+            width: 100%
+        }
+
+        [class^=IN_lbl-] {
+            display: block;
+            line-height: 2
+        }
+
+        [class^=IN_lbl-radio-],
+        [class^=IN_lbl-check-] {
+            margin: 0 .5rem
+        }
+
+        @media (min-width:20em) {
+            .IN_lbl-radio {
+                line-height: inherit
+            }
+
+            [class^=IN_lbl-check] {
+                line-height: 2
+            }
+        }
+
+        @media (min-width:59em) {
+            [class^=IN_lbl-check] {
+                line-height: inherit;
+                max-width: none
+            }
+        }
+
+        @media (min-width:30em) {
+
+            [class^=IN_lbl-radio-],
+            [class^=IN_lbl-check-] {
+                margin: 0
+            }
+
+            .spn-hidden {
+                visibility: hidden
+            }
+
+            .spn-at {
+                display: block;
+                text-align: center;
+                padding: 0 .618rem;
+                width: 4.5rem
+            }
+        }
+
+        .OUT_ttl {
+            margin-top: 2.618rem
+        }
+
+        .OUT_fgr {
+            margin: 1.618rem 0;
+            padding: 0
+        }
+
+        .OUT_btns {
+            margin-top: 1.618rem
+        }
+
+        .OUT_btns.flexed {
+            justify-content: space-around;
+            flex-wrap: nowrap
+        }
+
+        .button.btn-test {
+            background-color: #236ECE
+        }
+
+        .options_ttl {
+            margin-top: 1rem
+        }
+
+        .btn-copy {
+            margin-right: .618rem
+        }
+
+        .button.btn-copied {
+            background-color: #477343;
+            border: 1px solid #242424
+        }
+
+        @media (min-width: 20em) {
+            .grid-units {
+                display: grid;
+            }
+
+            .grid-inputs {
+                display: grid;
+                grid-gap: 0 1rem;
+                grid-template-columns: 1fr auto;
+            }
+        }
+
+        @media (min-width: 30em) {
+            [class^="grid-"] {
+                --columns: 7.5rem 1fr;
+                --gridGap: var(--spaceEighth);
+                display: grid;
+            }
+        }
+
+        @media (min-width: 32em) {
+            [class^="grid-"] {
+                --gridGap: var(--spaceHalf);
+            }
+        }
+
+        [class^="IN_lbl-check"],
+        [class^="IN_lbl-radio"] {
+            width: fit-content;
+            line-height: 2;
+        }
+
+        /* Details summary - PAB replacement */
+        details {
+            --shadowColor: rgba(0, 0, 0, 0);
+            margin: 1.618rem 0;
+            border: 1px solid rgba(96, 96, 128, .1);
+            background-color: rgba(255, 255, 255, .3);
+            box-shadow: 0 4px 4px var(--shadowColor);
+            transition: box-shadow .3s ease-out;
+        }
+
+        details:focus-within,
+        details:not([open]):hover {
+            --shadowColor: rgba(0, 0, 0, .3);
+        }
+
+        summary {
+            font-size: 1.115rem;
+            letter-spacing: -.01em;
+            line-height: 1.3;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: hsl(269, 19%, 30%);
+            font-weight: 400;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, .7);
+            padding: .618rem .236rem .618rem 1rem;
+            transition:
+                color .3s ease-out,
+                background-color .3s ease-out;
+        }
+
+        summary::marker {
+            color: hsl(214, 71%, 47%);
+        }
+
+        summary:hover,
+        summary:focus {
+            color: hsl(214, 71%, 47%);
+            background-color: #f7f7f7;
+        }
+
+        summary:focus-visible {
+            outline: .25rem solid hsl(214, 100%, 85%);
+            outline-offset: -.125rem;
+        }
+
+        .details_content {
+            padding: .618rem 1rem;
+            border-top: 1px solid rgba(0, 0, 0, .1);
+        }
+
+        .details_content>h2 {
+            margin-top: 0;
+        }
+
+        .details_content>ul+h2 {
+            margin-top: 1rem;
+        }
+
+        .details_content>ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .details_content li {
+            margin: 0;
+        }
+
+        .details_content li+li {
+            margin-top: .618rem;
+        }
+
+        /* Click spot */
+        [data-spot] {
+            position: relative;
+            overflow: hidden
+        }
+
+        [data-spot] * {
+            pointer-events: none
+        }
+
+        .spot-hex {
+            display: block;
+            position: absolute;
+            overflow: hidden;
+            transform: rotatez(0) scale(0);
+            opacity: 1;
+            transform-origin: 50% 50% 0px;
+        }
+
+        .spot-hex use {
+            fill: hsl(214, 100%, 70%)
+        }
+
+        .grid-propertyRange {
+            align-items: flex-start;
+        }
+
+        .range-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .frm_fld {
+            position: relative;
+        }
+
+        .range-multiple {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+            gap: 15px;
+        }
+
+        .btn-add,
+        .btn-remove {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 48px;
+            height: 48px;
+            border: 1px solid #ccc;
+            border-radius: 9999px;
+            background-color: var(--inpBg);
+
+            &:hover {
+                background-color: #fff;
+            }
+        }
+
+        .btn-remove {
+            position: absolute;
+            right: -20px;
+        }
+
+        .class-variable-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .class-variable-row input,
+        .class-variable-row select {
+            line-height: inherit;
+            font-size: 18px;
+            font-weight: inherit;
+            padding: .312rem .618rem;
+            max-width: 100%;
+            display: block;
+            outline: var(--inpFocusOut) solid 0;
+            border: 1px solid #ccc;
+            background-color: var(--inpBg);
+            transition: box-shadow .3s ease-out, border-color .3s ease-out;
+            width: 100%;
+        }
+
+        .variable-mapping {
+            font-size: 1rem;
+        }
+
+        #classVariableGrid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-right: 40px;
+            margin-top: 10px;
+        }
+
+        fieldset.frm_fld-classVars {
+            margin-top: 40px;
+        }
+
+        .output-first {
+            border: 1px dashed #000;
+            padding: 0 20px;
+            background: #fff;
+            margin-top: 20px;
+        }
+
+        .output-second,
+        .output-third {
+            border: 1px dashed #000;
+            padding: 0 20px;
+            background: #fff;
+            margin-top: 20px;
+        }
+
+        .btn-copy,
+        .btn-variable-copy {
+            padding: 7px 20px;
+        }
+    </style>
+</head>
+
+<body id="fluid-responsive-property-calculator" class="fluid-responsive-property-calculator">
+
+    <div><a class=skipToContent href=#main_h>Skip to main content</a></div>
+
+    <main id=main aria-label="Page content" tabindex=-1 class=inactive>
+        <div class="content flex fp">
+            <div class=l>
+
+                <!-- content.html.php -->
+                <div id=content-l class=loading>
+                    <form class=frm>
+                        <fieldset class=frm_fld>
+
+                            <legend class=-visuallyHidden>Fluid-responsive property calculator (updates output as values
+                                change)
+                            </legend>
+
+                            <fieldset class=frm_fld-units>
+                                <div class=grid-units>
+
+                                    <legend class=frm_lgnd-units>Units:</legend>
+
+                                    <div class=flexed-units>
+                                        <label class=IN_lbl-radio>
+                                            <input class=IN_radio type=radio name=unit id=IN_radio_px value=px checked>
+                                            <span></span>
+                                            <span class=-visuallyHidden>Use pixel units</span>
+                                            <span class=lbl_txt aria-hidden=true>PX</span>
+                                        </label>
+                                        <label class=IN_lbl-radio>
+                                            <input class=IN_radio type=radio name=unit id=IN_radio_rem value=rem>
+                                            <span></span>
+                                            <span class=-visuallyHidden>Use rem units</span>
+                                            <span class=lbl_txt aria-hidden=true>REM</span>
+                                        </label>
+                                        <label class=IN_lbl-radio>
+                                            <input class=IN_radio type=radio name=unit id=IN_radio_em value=em>
+                                            <span></span>
+                                            <span class=-visuallyHidden>Use em units</span>
+                                            <span class=lbl_txt aria-hidden=true>EM</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class=grid-selector style="display: none;">
+                                <label class=frm_lbl-selector for=IN_selector
+                                    aria-label="Selector: element, class or I.D. name">Selector
+                                    <small class=lbl_smll>(element, class, id)</small></label>
+                                <input class=IN-selector id=IN_selector type=text value=:root required>
+                            </div>
+
+                            <div class=grid-property style="display: none;">
+                                <label class=frm_lbl-property for=IN_property
+                                    aria-label="Property: usually font-size, but may be any property">Property
+                                    <small class=lbl_smll>(usually font-size)</small></label>
+                                <input class=IN-property id=IN_property type=text>
+                            </div>
+
+                            <div class=frm_fld-ranges>
+
+                                <fieldset class=frm_fld>
+                                    <div class=grid-viewport>
+
+                                        <legend class=frm_lgnd-viewport>Viewport:
+                                            <small class=lbl_smll>(browser width)</small>
+                                        </legend>
+
+                                        <div class=flexed-fromto>
+                                            <label class=frm_lbl for=IN_minVW>
+                                                <span class=-visuallyHidden>Viewport width; From, in <span
+                                                        class=units>px</span></span>
+                                                <span aria-hidden=true>from</span>
+                                            </label>
+                                            <input class=IN-minVW id=IN_minVW type=text value=768 required>
+                                            <label class=frm_lbl for=IN_maxVW>
+                                                <span class=-visuallyHidden>Viewport width; To, in <span
+                                                        class=units>px</span></span>
+                                                <span aria-hidden=true>to</span>
+                                            </label>
+                                            <input class=IN-maxVW id=IN_maxVW type=text value=1920 required>
+                                            <span class=units>px</span>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+
+                                <div class=grid-at aria-hidden=true>
+                                    <div></div>
+                                    <div class=flexed-fromto>
+                                        <span class=spn-hidden>from</span>
+                                        <span class=spn-at>@</span>
+                                        <span class=spn-hidden>to</span>
+                                        <span class=spn-at>@</span>
+                                        <span class="units spn-hidden">px</span>
+                                    </div>
+                                </div>
+
+                                <h2 class=-visuallyHidden>Ranges:</h2>
+
+                                <fieldset class=frm_fld-propertyRange>
+                                    <div class=grid-propertyRange>
+
+                                        <legend class=frm_lgnd-propertyRange>Range:
+                                            <small class=lbl_smll>(of property)</small>
+                                        </legend>
+
+                                        <div class="range-grid">
+                                            <div class=flexed-fromto>
+                                                <label class=frm_lbl for=IN_minFS>
+                                                    <span class=-visuallyHidden>Property range; From, in <span
+                                                            class=units>px</span></span>
+                                                    <span aria-hidden=true>from</span>
+                                                </label>
+                                                <input class=IN-minFS id=IN_minFS type=text value=16 required
+                                                    data-allowNegative>
+                                                <label class=frm_lbl for=IN_maxFS>
+                                                    <span class=-visuallyHidden>Property range; To, in <span
+                                                            class=units>px</span></span>
+                                                    <span aria-hidden=true>to</span>
+                                                </label>
+                                                <input class=IN-maxFS id=IN_maxFS type=text value=24 required
+                                                    data-allowNegative>
+                                                <span class=units>px</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="range-multiple">
+                                        <button type="button" id="btnAddRange" class="btn-add"><svg width="16"
+                                                height="16" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="plus">
+                                                <line x1="8" y1="4.37114e-08" x2="8" y2="16" stroke="#3a2c49"
+                                                    stroke-width="2"></line>
+                                                <line y1="8" x2="16" y2="8" stroke="#3a2c49" stroke-width="2"></line>
+                                            </svg></button>
+                                        <!-- <button type="button" id="btnRemoveRange" class="btn-remove"><svg width="16"
+                                                height="2" viewBox="0 0 16 2" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <line y1="1" x2="16" y2="1" stroke="#3a2c49" stroke-width="2"
+                                                    class="icon"></line>
+                                            </svg></button> -->
+                                    </div>
+                                </fieldset>
+
+                                <fieldset class="frm_fld-classVars">
+                                    <legend class="variable-mapping">Class ↔ Variable Mapping</legend>
+                                    <div id="classVariableGrid"></div>
+                                    <div class="range-multiple">
+                                        <button type="button" id="btnAddClassVar" class="btn-add"><svg width="16"
+                                                height="16" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" class="plus">
+                                                <line x1="8" y1="4.37114e-08" x2="8" y2="16" stroke="#3a2c49"
+                                                    stroke-width="2"></line>
+                                                <line y1="8" x2="16" y2="8" stroke="#3a2c49" stroke-width="2"></line>
+                                            </svg></button>
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                        </fieldset>
+                    </form>
+
+
+                    <section>
+                        <div class="row-block">
+                            <div class="output-first">
+                                <h2 class=-visuallyHidden>CSS output</h2>
+
+                                <div class="OUT_btns flexed">
+                                    <button id=btn_copy class="button orange btn-copy"
+                                        data-clipboard-target=#resultCSS>Copy
+                                        CSS</button>
+                                </div>
+
+                                <figure class="OUT_fgr shadowlift">
+
+                                    <figcaption class=OUT_cptn>Generated CSS:</figcaption>
+
+                                    <pre
+                                        class=OUT_pre><code class="OUT_code language-css" id=resultCSS spellcheck=false contenteditable></code></pre>
+
+                                </figure>
+                            </div>
+                            <div class="output-second">
+                                <div class="OUT_btns flexed">
+                                    <button type="button" id="btnCopyClassVarCSS"
+                                        class="button orange btn-variable-copy">Copy Class Variable CSS</button>
+                                </div>
+                                <!-- Generated Class Variables -->
+                                <figure class="OUT_fgr" style="flex:1 1 45%;">
+                                    <figcaption class="OUT_cptn">Generated Class Variable CSS:</figcaption>
+                                    <pre class="OUT_pre"><code id="resultClassVarCSS"></code></pre>
+                                </figure>
+                            </div>
+
+                            <div class="output-third">
+                                <div class="OUT_btns flexed">
+                                    <button type="button" id="btnCopyJsonClassVarCSS"
+                                        class="button orange btn-variable-copy">Copy JSON Class Variable</button>
+                                </div>
+                                <!-- Generated Class Variables -->
+                                <figure class="OUT_fgr" style="flex:1 1 45%;">
+                                    <figcaption class="OUT_cptn">Generated JSON Class Variable:</figcaption>
+                                    <pre class="OUT_pre"><code id="resultJsonClassVarCSS"></code></pre>
+                                </figure>
+                            </div>
+                        </div>
+
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+<script id=responsive_font_calculator_js>
+
+    const Calculator = (_ => {
+
+        'use strict';
+
+        // Start - Allow only numeric inputs //
+
+        // Limit to four rounded decimal places.
+        const sanitize = value => Math.round(value * 10000) / 10000;
+
+        const setInputFilter = (input, prop, filter) => {
+            ['input', 'keydown', 'keyup', 'mousedown', 'mouseup', 'select', 'contextmenu', 'drop'].forEach(event =>
+                input.addEventListener(event, e => {
+                    const target = e.target;
+                    if (filter(target.value)) {
+                        target.oldValue = target.value;
+                        target.oldSelectionStart = target.selectionStart;
+                        target.oldSelectionEnd = target.selectionEnd;
+                    } else if (target.hasOwnProperty('oldValue')) {
+                        target.value = target.oldValue;
+                        target.setSelectionRange(target.oldSelectionStart, target.oldSelectionEnd);
+                    } else {
+                        target.value = '';
+                    }
+                    if (SETTINGS[prop] && typeof SETTINGS[prop].set === 'function') {
+                        SETTINGS[prop].set(target.value);
+                    }
+                })
+            );
+        }
+
+
+        const setNumericInputEvents = prop => {
+
+            const obj = SETTINGS[prop].obj;
+
+            setInputFilter(obj, prop, value =>
+                obj.hasAttribute('data-allowNegative') ?
+                    /^[-]?\d*\.?\d*$/.test(value) : // Allow '-', digits and '.' only
+                    /^\d*\.?\d*$/.test(value)       // Allow digits and '.' only
+            );
+        };
+
+        // End - allow only numeric inputs //
+
+
+        const setNumericInputValues = (prop, value) => {
+
+            if (isNaN(value) || value === '') return;
+            // value = sanitize(value);
+
+            SETTINGS[prop].obj.value = value;
+            SETTINGS[prop].value = value + '';
+            updateOutput();
+        };
+
+        const setTextInputValue = (prop, value) => {
+            SETTINGS[prop].obj.value = value;
+            SETTINGS[prop].value = value;
+            updateOutput();
+        };
+
+
+        const radiosUnits = document.querySelectorAll('.IN_radio[name="unit"]');
+        const radiosMethods = document.querySelectorAll('.IN_radio[name="method"]');
+
+        const radiosSet = (set, val) => {
+            for (const rad of set) {
+                if (rad.value === val) {
+                    rad.setAttribute('checked', true);
+                } else {
+                    rad.removeAttribute('checked');
+                }
+            }
+        };
+
+        const setCheckedInputValues = (prop, value) => {
+            value += '';
+            if (value === 'true') {
+                SETTINGS[prop].obj.setAttribute('checked', true);
+            } else {
+                SETTINGS[prop].obj.removeAttribute('checked');
+            }
+            SETTINGS[prop].value = value + '';
+            updateOutput();
+        };
+
+        const SETTINGS = {
+
+            // Each primary key is an input or radio fieldset.
+
+            units: {
+                value: 'px',
+                previousValue: 'px',
+                init: _ => {
+                    for (const rad of radiosUnits) {
+                        rad.addEventListener('click', e => SETTINGS.units.set(e.target.value));
+                        // Reset when returning from a back button click
+                        // if (rad.hasAttribute('checked')) rad.click();
+                    }
+                },
+                set: value => {
+                    SETTINGS.units.previousValue = SETTINGS.units.value;
+                    SETTINGS.units.value = value;
+                    radiosSet(radiosUnits, value);
+                    convertNumericValues();
+                    updateOutput();
+                    updateUnits();
+                }
+            },
+
+            selector: {
+                obj: document.querySelector('.IN-selector'),
+                value: ':root',
+                init: _ =>
+                    SETTINGS.selector.obj.addEventListener('input', e => SETTINGS.selector.set(e.target.value)),
+                set: value => setTextInputValue('selector', value)
+            },
+
+            property: {
+                obj: document.querySelector('.IN-property'),
+                value: '',
+                init: _ =>
+                    SETTINGS.property.obj.addEventListener('input', e => SETTINGS.property.set(e.target.value)),
+                set: value => setTextInputValue('property', value)
+            },
+
+            // PROPERTY RANGE
+
+            minFS: {
+                obj: document.querySelector('.IN-minFS'),
+                value: '16',
+                init: _ => setNumericInputEvents('minFS'),
+                set: value => setNumericInputValues('minFS', value)
+            },
+
+            maxFS: {
+                obj: document.querySelector('.IN-maxFS'),
+                value: '24',
+                init: _ => setNumericInputEvents('maxFS'),
+                set: value => setNumericInputValues('maxFS', value)
+            },
+
+            // VIEWPORT RANGE
+
+            minVW: {
+                obj: document.querySelector('.IN-minVW'),
+                value: '768',
+                init: _ => setNumericInputEvents('minVW'),
+                set: value => setNumericInputValues('minVW', value)
+            },
+
+            maxVW: {
+                obj: document.querySelector('.IN-maxVW'),
+                value: '1920',
+                init: _ => setNumericInputEvents('maxVW'),
+                set: value => setNumericInputValues('maxVW', value)
+            },
+
+            // CSS METHODS
+
+            methods: {
+                value: 'stops',
+                init: _ => {
+                    for (const rad of radiosMethods) {
+                        rad.addEventListener('click', e => SETTINGS.methods.set(e.target.value));
+
+                        // Reset when returning from a back button click
+                        // if (rad.hasAttribute('checked')) rad.click();
+                    }
+                },
+                set: value => {
+                    SETTINGS.methods.value = value;
+                    radiosSet(radiosMethods, value);
+                    updateOutput();
+                }
+            },
+
+            // OPTIONS
+
+            // comments: { ...},
+            // safarifix: { ...},
+            // longhand: { ...}
+
+
+        };
+
+        const OUTPUT = {
+            text: '',
+            value: ''
+        };
+
+
+        // Copy button visuals - processing is an external function
+
+        const initCopyBtn = _ => {
+            const btn = document.getElementById('btn_copy');
+            if (btn) {
+                btn.originalText = btn.textContent;
+                btn.clickedText = btn.textContent.replace('Copy', 'Copied');
+            }
+            return btn;
+        };
+
+        const btn_cpy = initCopyBtn();
+
+        const resetCopyBtn = _ => {
+            if (btn_cpy) {
+                btn_cpy.textContent = btn_cpy.originalText;
+                btn_cpy.classList.remove('green');
+                btn_cpy.classList.add('orange');
+            }
+        };
+
+        /* ---------------- MULTI PROPERTY RANGES ---------------- */
+        let propertyRanges = [];
+
+        function addRange(min = 16, max = 24) {
+            const container = document.querySelector('.range-grid');
+            const index = propertyRanges.length + 1; // 1-based
+
+            const propertyName = `--gb_font_size_${index}`;
+
+            const div = document.createElement('div');
+            div.className = 'flexed-fromto';
+            div.innerHTML = `
+        <label for="IN_minFS_${index}">from</label>
+        <input class="IN-minFS" id="IN_minFS_${index}" type="text" value="${min}" required data-allowNegative>
+        <label for="IN_maxFS_${index}">to</label>
+        <input class="IN-maxFS" id="IN_maxFS_${index}" type="text" value="${max}" required data-allowNegative>
+        <span class="units">${SETTINGS.units.value}</span>
+        <button type="button" class="btn-remove">
+            <svg width="16" height="2" viewBox="0 0 16 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line y1="1" x2="16" y2="1" stroke="#3a2c49" stroke-width="2" class="icon"></line>
+            </svg>
+        </button>
+    `;
+
+            container.appendChild(div);
+
+            const minObj = div.querySelector('.IN-minFS');
+            const maxObj = div.querySelector('.IN-maxFS');
+            const removeBtn = div.querySelector('.btn-remove');
+
+            propertyRanges.push({ div, minObj, maxObj, property: propertyName });
+
+            setInputFilter(minObj, null, v => /^-?\d*\.?\d*$/.test(v));
+            setInputFilter(maxObj, null, v => /^-?\d*\.?\d*$/.test(v));
+
+            minObj.addEventListener('input', updateOutput);
+            maxObj.addEventListener('input', updateOutput);
+
+            removeBtn.addEventListener('click', () => {
+                div.remove();
+                propertyRanges = propertyRanges.filter(r => r.div !== div);
+                updateOutput();
+                refreshVarOptions();
+            });
+
+            updateOutput();
+            refreshVarOptions();
+        }
+
+
+        document.getElementById('btnAddRange')
+            .addEventListener('click', () => addRange());
+
+
+        function initDefaultRange() {
+            const minObj = document.querySelector('.IN-minFS');
+            const maxObj = document.querySelector('.IN-maxFS');
+            if (minObj && maxObj) {
+                propertyRanges.push({ minObj, maxObj });
+
+                setInputFilter(minObj, null, v => /^-?\d*\.?\d*$/.test(v));
+                setInputFilter(maxObj, null, v => /^-?\d*\.?\d*$/.test(v));
+
+                minObj.addEventListener('input', updateOutput);
+                maxObj.addEventListener('input', updateOutput);
+            }
+        }
+        const unitRadios = document.querySelectorAll('.IN_radio[name="unit"]');
+
+        function getSelectedUnit() {
+            const checked = Array.from(unitRadios).find(r => r.checked);
+            return checked ? checked.value : 'px';
+        }
+        function getVarName(i) {
+            return `--gb_font_size_${i + 1}`;
+        }
+
+        let classRows = [];
+        const btnAddClassVar = document.getElementById('btnAddClassVar');
+        const resultClassVarCSS = document.getElementById('resultClassVarCSS');
+        const resultJsonClassVarCSS = document.getElementById('resultJsonClassVarCSS');
+        const btnCopyClassVarCSS = document.getElementById('btnCopyClassVarCSS');
+        const btnCopyJsonClassVarCSS = document.getElementById('btnCopyJsonClassVarCSS');
+        const btnCopyMainCSS = document.getElementById('btnCopyMainCSS');
+        const classVariableGrid = document.getElementById('classVariableGrid');
+        const selectorInput = document.getElementById('IN_selector');
+
+        function createClassRow(className = '', classVar = '') {
+            const div = document.createElement('div');
+            div.className = 'class-variable-row';
+            div.innerHTML = `
+      <input type="text" class="className" placeholder="class-name (no dot)" value="${className}">
+      <input type="text" class="classVar" placeholder="variable (e.g. --gb_font_size_0)" value="${classVar}">
+      <select class="varSelect"></select>
+      <button type="button" class="btn-remove"><svg width="16" height="2" viewBox="0 0 16 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line y1="1" x2="16" y2="1" stroke="#3a2c49" stroke-width="2" class="icon"></line>
+            </svg></button>
+    `;
+            classVariableGrid.appendChild(div);
+
+            const classInput = div.querySelector('.className');
+            const varInput = div.querySelector('.classVar');
+            const select = div.querySelector('.varSelect');
+            const removeBtn = div.querySelector('.btn-remove');
+
+            classInput.addEventListener('input', updateClassVarOutput);
+            varInput.addEventListener('input', updateClassVarOutput);
+            select.addEventListener('change', () => {
+                if (select.value) {
+                    varInput.value = select.value;
+                    updateClassVarOutput();
+                }
+            });
+            removeBtn.addEventListener('click', () => {
+                div.remove();
+                classRows = classRows.filter(r => r.div !== div);
+                updateClassVarOutput();
+            });
+
+            classRows.push({ div, classInput, varInput, select });
+            refreshVarOptions();
+            updateClassVarOutput();
+        }
+
+        function refreshVarOptions() {
+            const opts = [{ v: '', t: '-- pick variable --' }];
+            propertyRanges.forEach((_, i) => opts.push({ v: getVarName(i), t: getVarName(i) }));
+            classRows.forEach(r => {
+                const prev = r.select.value;
+                r.select.innerHTML = opts.map(o => `<option value="${o.v}">${o.t}</option>`).join('');
+                if (opts.some(o => o.v === prev)) r.select.value = prev;
+            });
+        }
+
+        function updateClassVarOutput() {
+            const validRows = classRows
+                .filter(r => r.classInput.value.trim() && r.varInput.value.trim());
+
+            // --- Build CSS ---
+            const cssLines = validRows.map(r => {
+                const cls = r.classInput.value.trim().replace(/^\./, '');
+                return `.${cls} { font-size: var(${r.varInput.value.trim()}); }`;
+            });
+            resultClassVarCSS.textContent = cssLines.join('\n');
+
+            // --- Build JSON ---
+            const objects = validRows.map((r, i) => {
+                const cls = r.classInput.value.trim().replace(/^\./, '');
+                return {
+                    slug: cls,
+                    size: `var(${r.varInput.value.trim()})`,
+                    name: cls
+                };
+            });
+
+            const jsonString = objects
+                .map(obj => JSON.stringify(obj, null, 2))
+                .join(',\n');   // <- no [ ]
+
+            resultJsonClassVarCSS.textContent = jsonString;
+            refreshVarOptions();
+        }
+
+
+        function updateUnitLabels() {
+            const unit = getSelectedUnit();
+            document.querySelectorAll('.units').forEach(span => {
+                span.textContent = unit;
+            });
+        }
+
+
+
+        const updateNumericValues = _ => {
+            SETTINGS.minFS.obj.value = SETTINGS.minFS.value;
+            SETTINGS.maxFS.obj.value = SETTINGS.maxFS.value;
+            SETTINGS.minVW.obj.value = SETTINGS.minVW.value;
+            SETTINGS.maxVW.obj.value = SETTINGS.maxVW.value;
+        }
+
+        const convertNumericValues = _ => {
+            const prevUnit = SETTINGS.units.previousValue;
+            const unit = SETTINGS.units.value;
+            switch (unit) {
+                case 'px':
+                    switch (prevUnit) {
+                        case 'em':
+                        case 'rem':
+                            // multiply by 16
+                            SETTINGS.minFS.value = SETTINGS.minFS.value * 16;
+                            SETTINGS.maxFS.value = SETTINGS.maxFS.value * 16;
+                            SETTINGS.minVW.value = SETTINGS.minVW.value * 16;
+                            SETTINGS.maxVW.value = SETTINGS.maxVW.value * 16;
+                            updateNumericValues();
+                            break;
+                    }
+                    break;
+                case 'em':
+                case 'rem':
+                    switch (prevUnit) {
+                        case 'px':
+                            // divide by 16
+                            SETTINGS.minFS.value = SETTINGS.minFS.value / 16;
+                            SETTINGS.maxFS.value = SETTINGS.maxFS.value / 16;
+                            SETTINGS.minVW.value = SETTINGS.minVW.value / 16;
+                            SETTINGS.maxVW.value = SETTINGS.maxVW.value / 16;
+                            updateNumericValues();
+                            break;
+                    }
+                    break;
+            }
+        }
+
+
+        const updateUnits = _ => {
+            let units = document.querySelectorAll('.units');
+            for (const unit of units) {
+                unit.textContent = SETTINGS.units.value;
+            }
+        }
+
+
+
+        /* Local Storage */
+
+        const useLocalStorage = (function () {
+            try {
+                return 'localStorage' in window && window['localStorage'] !== null;
+            } catch (e) {
+                return false;
+            }
+        }());
+
+        const getStoragePropertyValue = prop => {
+            if (!useLocalStorage) return;
+            const store = JSON.parse(localStorage.getItem('FRPCalc'));
+            if (!store) return;
+            return store[prop];
+        };
+
+        const setStoragePropertyValues = _ => {
+            if (!useLocalStorage) return;
+            const store = {};
+            Object.keys(SETTINGS).forEach(function (prop) {
+                store[prop] = SETTINGS[prop].value + '';
+            });
+            localStorage.setItem('FRPCalc', JSON.stringify(store));
+        };
+
+
+
+
+        const updateOutput = _ => {
+            const resultCSS = document.getElementById('resultCSS');
+            if (!resultCSS) return;
+
+            resetCopyBtn();
+
+            let finalStr = '';
+
+            // Loop through each property range input set
+            propertyRanges.forEach((range, i) => {
+                const unit = SETTINGS.units.value;
+                const selector = SETTINGS.selector.value;
+                const property = range?.property || '--gb_font_size_1';
+                const minFS = sanitize(range.minObj.value);
+                const maxFS = sanitize(range.maxObj.value);
+                const minVW = sanitize(SETTINGS.minVW.value);
+                const maxVW = sanitize(SETTINGS.maxVW.value);
+                const method = SETTINGS.methods.value;
+
+                const useClamp = method === 'clamp';
+                const useMinmax = method === 'minmax';
+                const useStops = method === 'stops';
+                // const useComments = SETTINGS.comments.obj.checked;
+                // const useSafariFix = SETTINGS.safarifix.obj.checked;
+                // const useLonghand = SETTINGS.longhand.obj.checked;
+
+                const strTab = (useMinmax || useClamp) ? '' : '  ';
+
+                const getMultiplier = _ => {
+                    let multiplier = 100 * (maxFS - minFS);
+                    multiplier /= (maxVW - minVW);
+                    return sanitize(multiplier) + '';
+                };
+
+                const multiplier = getMultiplier();
+                const baseSize = (unit === 'px') ? minFS / 16 : minFS;
+
+
+                let strCalc = `calc(${baseSize}rem + ((1vw - ${(minVW / 100) + unit}) * ${multiplier}))`;
+
+                const strFS = `${property}: ${strCalc};`;
+
+                // Build output string for this range
+                let str = '';
+
+                let queryStr = '';
+
+                let methodStr = `  ${property}: clamp(${Math.min(minFS, maxFS)}${unit}, ${strCalc}, ${Math.max(minFS, maxFS)}${unit});\n`;
+
+
+                let safariStr = '';
+
+                let stopStr = '';
+
+
+                str += methodStr;
+
+                str += safariStr;
+
+                finalStr += str + '\n';
+            });
+
+            // Local storage (optional: store only last range or merge)
+            setStoragePropertyValues();
+
+            OUTPUT.value = finalStr;
+            resultCSS.textContent = finalStr;
+
+            if (typeof Prism === 'object') {
+                Prism.highlightElement(resultCSS);
+            }
+        };
+
+
+
+        // Open settings and for each primary run initialise and set the values
+
+        const initialise = _ => {
+
+            // Default values have to be set prior to initialisation
+            Object.keys(SETTINGS).forEach(function (prop) {
+                const value = getStoragePropertyValue(prop) || SETTINGS[prop].value;
+                SETTINGS[prop].value = value;
+            });
+
+            Object.keys(SETTINGS).forEach(function (prop) {
+                SETTINGS[prop].init();
+                SETTINGS[prop].set(SETTINGS[prop].value);
+            });
+        }
+
+        btnCopyClassVarCSS.addEventListener('click', () => {
+            navigator.clipboard.writeText(resultClassVarCSS.textContent || '');
+            btnCopyClassVarCSS.textContent = 'Copied!';
+            setTimeout(() => btnCopyClassVarCSS.textContent = 'Copy Class Variable CSS', 1200);
+        });
+
+        btnCopyJsonClassVarCSS.addEventListener('click', () => {
+            navigator.clipboard.writeText(resultJsonClassVarCSS.textContent || '');
+            btnCopyJsonClassVarCSS.textContent = 'Copied!';
+            setTimeout(() => {
+                btnCopyJsonClassVarCSS.textContent = 'Copy Class Variable CSS';
+            }, 1200);
+        });
+
+
+        btnAddClassVar.addEventListener('click', () => createClassRow('', ''));
+        createClassRow('', '');
+        updateClassVarOutput();
+        updateUnitLabels();
+        initDefaultRange();
+        initialise();
+        updateUnits();
+
+        return {
+            SETTINGS: SETTINGS,
+            OUTPUT: OUTPUT
+        }
+
+    })();
+</script>
+
+<script id=local_scripts>
+    window.addEventListener('load', function () {
+        function t() { var t = document.getElementById('btn_copy'); t && (t.initialTextContent = t.textContent, t.addEventListener('click', function (t) { t.preventDefault() }, !1)); var e = new Clipboard('#btn_copy'); e.on('success', function (t) { var e = t.trigger; e && e.textContent === e.initialTextContent && (e.textContent = e.textContent.replace('Copy', 'Copied'), e.classList.add('btn-copied'), setTimeout(function () { e.textContent = e.initialTextContent, e.classList.remove('btn-copied') }, 2e3)) }) } setTimeout(function () {
+            /*scriptWriter('window_opener','test-window-opener.js',!1),*/
+            scriptWriter('clipboard', '../js/clipboard.min.js', t)
+        }, 400)
+    }, !1);
+</script>
+
+</html>
